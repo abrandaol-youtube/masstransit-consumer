@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using masstransit_consumer_api_first.Worker;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,10 +46,6 @@ namespace masstransit_consumer_api_first
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddHostedService<OrderConsumerWorker>();
                 });
     }
 }

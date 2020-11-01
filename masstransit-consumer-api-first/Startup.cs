@@ -29,8 +29,6 @@ namespace masstransit_consumer_api_first
         {
             services.AddControllers();
 
-            services.AddSingleton<IOrderConsumer, OrderConsumer>();
-
             services.AddMassTransit(cfg =>
             {
                 cfg.AddConsumer<OrderConsumer>();

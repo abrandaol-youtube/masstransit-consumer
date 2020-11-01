@@ -9,11 +9,9 @@ using System.Threading.Tasks;
 
 namespace masstransit_consumer_api_first.Consumer
 {
-    public sealed class OrderConsumer : IOrderConsumer
+    public sealed class OrderConsumer : IConsumer<Order>
     {
         private readonly ILogger<OrderConsumer> _logger;
-
-        public event EventHandler<Order> OrderReceived;
 
         public OrderConsumer(ILogger<OrderConsumer> logger)
         {
@@ -24,9 +22,10 @@ namespace masstransit_consumer_api_first.Consumer
         {
             try
             {
-                _logger.LogInformation("Message received", context.Message);
+                var order = context.Message;
 
-                OrderReceived?.Invoke(this, context.Message);
+                _logger.LogInformation($"Order received: {order.OrderId}");
+
             }catch(Exception ex)
             {
                 _logger.LogError("Error on try to consume order", ex);
